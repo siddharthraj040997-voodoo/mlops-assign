@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 100
+exclude = .git,__pycache__,mlartifacts,mlruns,.venv,notebooks
+per-file-ignores =
+    scripts/build_notebooks.py: E501
+    scripts/make_architecture.py: E702

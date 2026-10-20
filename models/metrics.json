@@ -1,0 +1,69 @@
+{
+  "selected_model": "logistic_regression",
+  "sklearn_version": "1.8.0",
+  "n_samples": 303,
+  "models": {
+    "logistic_regression": {
+      "best_params": {
+        "C": 1,
+        "class_weight": null
+      },
+      "cv_roc_auc": 0.9024931590148981,
+      "cv_accuracy": 0.8471088435374149,
+      "cv_precision": 0.8767529146045769,
+      "cv_recall": 0.783399209486166,
+      "cv_roc_auc_std": 0.013878724467175953,
+      "cv_accuracy_std": 0.009976921631744011,
+      "cv_precision_std": 0.054190324098361047,
+      "cv_recall_std": 0.045917899546111016,
+      "test_accuracy": 0.8852459016393442,
+      "test_precision": 0.8387096774193549,
+      "test_recall": 0.9285714285714286,
+      "test_f1": 0.8813559322033898,
+      "test_roc_auc": 0.9664502164502166,
+      "run_id": "93aee62b29054af9bfb29c72bbe6d26b"
+    },
+    "random_forest": {
+      "best_params": {
+        "max_depth": 3,
+        "min_samples_leaf": 3,
+        "n_estimators": 400
+      },
+      "cv_roc_auc": 0.9020207650642433,
+      "cv_accuracy": 0.8180272108843537,
+      "cv_precision": 0.8430967690720014,
+      "cv_recall": 0.7553359683794467,
+      "cv_roc_auc_std": 0.02518411718743444,
+      "cv_accuracy_std": 0.021395815045850353,
+      "cv_precision_std": 0.0626181314943119,
+      "cv_recall_std": 0.09916459624073816,
+      "test_accuracy": 0.8360655737704918,
+      "test_precision": 0.8,
+      "test_recall": 0.8571428571428571,
+      "test_f1": 0.8275862068965517,
+      "test_roc_auc": 0.9567099567099567,
+      "run_id": "4529e895a2c14a559da5e6f755dfcbb9"
+    },
+    "gradient_boosting": {
+      "best_params": {
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "n_estimators": 100
+      },
+      "cv_roc_auc": 0.8776753037622603,
+      "cv_accuracy": 0.8221938775510204,
+      "cv_precision": 0.8289285714285715,
+      "cv_recall": 0.78300395256917,
+      "cv_roc_auc_std": 0.027821596563607106,
+      "cv_accuracy_std": 0.02572528379424803,
+      "cv_precision_std": 0.06401131915209868,
+      "cv_recall_std": 0.0682822769117216,
+      "test_accuracy": 0.9016393442622951,
+      "test_precision": 0.8666666666666667,
+      "test_recall": 0.9285714285714286,
+      "test_f1": 0.896551724137931,
+      "test_roc_auc": 0.9588744588744589,
+      "run_id": "485fa1dc59a747f68a9682c411b69252"
+    }
+  }
+}

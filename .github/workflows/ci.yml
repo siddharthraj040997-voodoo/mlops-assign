@@ -1,0 +1,128 @@
+name: CI/CD - Heart Disease MLOps
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.12"
+
+# Explicit `shell: bash` runs steps as `bash -eo pipefail`. Without it the default
+# is `bash -e`, so `pytest ... | tee log` would exit 0 even when tests fail.
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint-test-train:
+    name: Lint, test and train
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+
+      - name: Install dependencies (clean environment)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint (flake8) - fails the pipeline on any violation
+        run: flake8 . --count --statistics
+
+      - name: Unit tests (pytest) - fails the pipeline on any failure
+        run: |
+          mkdir -p ci_logs
+          pytest --junitxml=ci_logs/junit.xml --cov=src --cov=api \
+                 --cov-report=xml:ci_logs/coverage.xml --cov-report=term \
+                 2>&1 | tee ci_logs/pytest.log
+
+      - name: Download dataset
+        run: python scripts/download_data.py 2>&1 | tee ci_logs/download.log
+
+      - name: Generate EDA figures
+        run: python -m src.eda
+
+      - name: Train, tune and track with MLflow
+        run: python -m src.train 2>&1 | tee ci_logs/train.log
+
+      - name: Verify trained artifact loads and predicts
+        run: |
+          python - <<'PY'
+          import joblib, pandas as pd
+          from src.config import MODEL_PATH, FEATURES
+          from src.data import load_clean
+          m = joblib.load(MODEL_PATH)
+          X = load_clean()[FEATURES].head(5)
+          p = m.predict_proba(X)
+          assert p.shape == (5, 2), p.shape
+          print("artifact OK", p[:, 1].round(3))
+          PY
+
+      - name: Upload model, metrics and MLflow store
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-and-tracking
+          path: |
+            models/
+            mlflow.db
+            mlartifacts/
+            reports/figures/
+            data/heart_clean.csv
+          if-no-files-found: warn
+
+      - name: Upload CI logs and test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-logs
+          path: ci_logs/
+
+  docker:
+    name: Build and smoke-test container
+    runs-on: ubuntu-latest
+    needs: lint-test-train
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch freshly trained model
+        uses: actions/download-artifact@v4
+        with:
+          name: model-and-tracking
+          path: _artifacts
+
+      - name: Place model in build context
+        run: cp _artifacts/models/heart_pipeline.joblib models/heart_pipeline.joblib
+
+      - name: Build image
+        run: docker build -t heart-api:ci .
+
+      - name: Run container
+        run: |
+          docker run -d --name heart-api -p 8000:8000 heart-api:ci
+          for i in $(seq 1 30); do
+            curl -fs http://localhost:8000/health && break || sleep 2
+          done
+
+      - name: Smoke test /health and /predict
+        run: bash scripts/smoke_test.sh http://localhost:8000 | tee smoke.log
+
+      - name: Collect container logs
+        if: always()
+        run: docker logs heart-api > container.log 2>&1 || true
+
+      - name: Upload smoke-test and container logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-logs
+          path: |
+            smoke.log
+            container.log

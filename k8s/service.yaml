@@ -1,0 +1,13 @@
+# LoadBalancer: on Minikube run `minikube tunnel`; on Docker Desktop it is
+# reachable at localhost:80; on GKE/EKS/AKS a public IP is provisioned.
+apiVersion: v1
+kind: Service
+metadata:
+  name: heart-api
+  namespace: heart-mlops
+  labels: {app: heart-api}
+spec:
+  type: LoadBalancer
+  selector: {app: heart-api}
+  ports:
+    - {name: http, port: 80, targetPort: http}

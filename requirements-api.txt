@@ -1,0 +1,9 @@
+# Minimal runtime for the serving container. scikit-learn MUST match training.
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+joblib==1.5.3
+fastapi==0.143.5
+uvicorn==0.54.0
+pydantic==2.14.1
+prometheus_client==0.26.0
