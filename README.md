@@ -11,6 +11,7 @@ tested, containerised, Kubernetes-deployable, monitored API.
 - **Interactive Swagger Docs:** `http://localhost:8000/docs`
 - **Monitoring Stack:** Prometheus (`:9090`) & Grafana (`:3000`, `admin`/`admin`)
 - **Demo Video Script:** [`DEMO_VIDEO_SCRIPT.txt`](DEMO_VIDEO_SCRIPT.txt)
+- **Demo Video Recording:** [`https://drive.google.com/file/d/1KbYK9kO4fksSSJSuPxfZTOwOay5oqFNK/view?usp=sharing`](https://drive.google.com/file/d/1KbYK9kO4fksSSJSuPxfZTOwOay5oqFNK/view?usp=sharing)
 
 
 | | |

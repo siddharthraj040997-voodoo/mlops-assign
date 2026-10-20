@@ -4,7 +4,7 @@
 **Student:** `Siddharth Raj` | **ID:** `2025ae05706` (`2025ae05706@wilp.bits-pilani.ac.in`)  
 **Code repository:** `https://github.com/siddharthraj040997-voodoo/mlops-assign`  
 **Deployed API / access:** `http://localhost:8000/docs` (local Kubernetes LoadBalancer: `http://localhost/docs` or `http://127.0.0.1:8000/docs`)  
-**Demo video:** `<link to recording>`
+**Demo video:** `https://drive.google.com/file/d/1KbYK9kO4fksSSJSuPxfZTOwOay5oqFNK/view?usp=sharing`
 
 ## 1. Summary
 
