@@ -2,7 +2,16 @@
 
 Predicts presence of heart disease from 13 clinical features (UCI Cleveland, 303 patients) and ships the model as a
 tested, containerised, Kubernetes-deployable, monitored API.
-Full write-up: [`report/REPORT.pdf`](report/REPORT.pdf).
+
+- **Student:** `Siddharth Raj`
+- **BITS ID:** `2025ae05706` (`2025ae05706@wilp.bits-pilani.ac.in`)
+- **Course:** Machine Learning Operations (MLOps) AIMLCZG523 - Assignment 01
+- **GitHub Repository:** [`https://github.com/siddharthraj040997-voodoo/mlops-assign`](https://github.com/siddharthraj040997-voodoo/mlops-assign)
+- **Full Report:** [`report/REPORT.pdf`](report/REPORT.pdf) / [`report/REPORT.html`](report/REPORT.html)
+- **Interactive Swagger Docs:** `http://localhost:8000/docs`
+- **Monitoring Stack:** Prometheus (`:9090`) & Grafana (`:3000`, `admin`/`admin`)
+- **Demo Video Script:** [`DEMO_VIDEO_SCRIPT.txt`](DEMO_VIDEO_SCRIPT.txt)
+
 
 | | |
 |---|---|

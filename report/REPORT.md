@@ -1,9 +1,9 @@
 # Heart Disease Risk Prediction: End-to-End MLOps
 
 **Course:** Machine Learning Operations (MLOps) AIMLCZG523 - Assignment 01  
-**Student:** `<NAME>` | **ID:** `<BITS ID>`  
-**Code repository:** `https://github.com/<your-username>/heart-disease-mlops`  
-**Deployed API / access:** `http://<LOADBALANCER-IP>/docs` (local: `minikube tunnel` then `http://127.0.0.1/docs`)  
+**Student:** `Siddharth Raj` | **ID:** `2025ae05706` (`2025ae05706@wilp.bits-pilani.ac.in`)  
+**Code repository:** `https://github.com/siddharthraj040997-voodoo/mlops-assign`  
+**Deployed API / access:** `http://localhost:8000/docs` (local Kubernetes LoadBalancer: `http://localhost/docs` or `http://127.0.0.1:8000/docs`)  
 **Demo video:** `<link to recording>`
 
 ## 1. Summary
@@ -21,7 +21,7 @@ A binary classifier predicts the presence of heart disease from 13 clinical attr
 ## 2. Setup and installation
 
 ```bash
-git clone https://github.com/<your-username>/heart-disease-mlops && cd heart-disease-mlops
+git clone https://github.com/siddharthraj040997-voodoo/mlops-assign && cd heart-disease-mlops
 python -m venv .venv && source .venv/bin/activate        # Python 3.12
 pip install -r requirements.txt
 
