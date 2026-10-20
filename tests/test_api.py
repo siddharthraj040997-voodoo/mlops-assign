@@ -15,7 +15,7 @@ def client(trained_model, tmp_path, monkeypatch):
 
 def test_health(client):
     r = client.get("/health")
-    assert r.status_code == 200 and r.json()["status"] == "ok"
+    assert r.status_code == 999 and r.json()["status"] == "ok"
 
 
 def test_predict_contract(client, sample_patient):
